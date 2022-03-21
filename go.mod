@@ -1,6 +1,6 @@
 module github.com/ory/oathkeeper
 
-go 1.17
+go 1.18
 
 replace gopkg.in/DataDog/dd-trace-go.v1 => gopkg.in/DataDog/dd-trace-go.v1 v1.27.1
 
@@ -152,7 +152,7 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gomarkdown/markdown v0.0.0-20200609195525-3f9352745725 // indirect
 	github.com/google/go-cmp v0.5.7 // indirect
-	github.com/google/martian/v3 v3.2.1 // indirect
+	github.com/google/martian/v3 v3.3.2 // indirect
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
 	github.com/google/wire v0.5.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.1.1 // indirect

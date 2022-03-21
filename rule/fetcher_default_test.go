@@ -15,7 +15,6 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
@@ -51,10 +50,6 @@ func TestFetcherReload(t *testing.T) {
 	id := uuid.New().String()
 	configFile := filepath.Join(tempdir, ".oathkeeper-"+id+".yml")
 	require.NoError(t, ioutil.WriteFile(configFile, []byte(""), 0666))
-
-	l := logrusx.New("", "", logrusx.ForceLevel(logrus.TraceLevel))
-	wiperx.InitializeConfig("oathkeeper-"+id, tempdir, nil)
-	wiperx.WatchConfig(l, nil)
 
 	go func() {
 		require.NoError(t, r.RuleFetcher().Watch(context.TODO()))
@@ -153,10 +148,6 @@ func TestFetcherWatchConfig(t *testing.T) {
 	id := uuid.New().String()
 	configFile := filepath.Join(tempdir, ".oathkeeper-"+id+".yml")
 	require.NoError(t, ioutil.WriteFile(configFile, []byte(""), 0666))
-
-	l := logrusx.New("", "", logrusx.ForceLevel(logrus.TraceLevel))
-	wiperx.InitializeConfig("oathkeeper-"+id, tempdir, nil)
-	wiperx.WatchConfig(l, nil)
 
 	go func() {
 		require.NoError(t, r.RuleFetcher().Watch(context.TODO()))
@@ -258,9 +249,6 @@ access_rules:
   repositories:
   - file://`+repository+`
 `), 0777))
-
-	wiperx.InitializeConfig("oathkeeper-"+id, os.TempDir(), nil)
-	wiperx.WatchConfig(nil, nil)
 
 	go func() {
 		require.NoError(t, r.RuleFetcher().Watch(context.TODO()))
@@ -405,9 +393,6 @@ access_rules:
   - gs://oathkeeper-test-bucket/path/prefix/rules.json
   - azblob://path/prefix/rules.json
 `), 0777))
-
-	wiperx.InitializeConfig("oathkeeper-"+id, os.TempDir(), nil)
-	wiperx.WatchConfig(nil, nil)
 
 	go func() {
 		require.NoError(t, r.RuleFetcher().Watch(context.TODO()))
